@@ -2,4 +2,4 @@
 pki__root_ca_certificates_folder: "{{ pki__default_root_ca_certificates_folder }}"
 pki__update_ca_certificates_cmd: "{{ pki__default_update_ca_certificates_cmd }}"
 pki__root_ca_certificates: ~
-pki__certificates: ~
+pki__certificates: []

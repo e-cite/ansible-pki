@@ -22,7 +22,7 @@ keine
         -----BEGIN CERTIFICATE-----
       ...
   ~~~
-- `pki__certificates`: (*Optional, default auf undefined*)
+- `pki__certificates`: (*Optional, default auf []*)
 
   Liste mit Zertifikaten, die deployed werden sollen.
   ~~~yaml
