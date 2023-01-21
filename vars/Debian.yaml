@@ -1,0 +1,3 @@
+---
+pki__default_root_ca_certificates_folder: /usr/local/share/ca-certificates
+pki__default_update_ca_certificates_cmd: update-ca-certificates

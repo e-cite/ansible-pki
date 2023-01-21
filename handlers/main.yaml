@@ -1,0 +1,4 @@
+---
+- name: pki__update_ca_certificates
+  ansible.builtin.shell:
+    cmd: "{{ pki__update_ca_certificates_cmd }}"

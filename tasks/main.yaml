@@ -1,0 +1,43 @@
+---
+- name: Include OS family vars
+  include_vars:
+    "{{ ansible_os_family }}.yaml"
+
+- name: Create root ca directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ pki__root_ca_certificates_folder }}"
+
+- name: Deploy root ca certificates
+  ansible.builtin.template:
+    dest: "{{ pki__root_ca_certificates_folder }}/{{ item.file }}"
+    src: templates/certificate.crt.j2
+    mode: '644'
+  vars:
+    name: "{{ item.name }}"
+    content: "{{ item.certificate }}"
+  loop: "{{ pki__root_ca_certificates }}"
+  notify: pki__update_ca_certificates
+  when: pki__root_ca_certificates is defined
+
+- name: Create certificate directories
+  ansible.builtin.file:
+    path: "{{ item.file | dirname }}"
+    state: directory
+    mode: '0755'
+  loop: "{{ pki__certificates }}"
+  when: pki__certificates is defined
+
+- name: Deploy certificates
+  ansible.builtin.template:
+    dest: "{{ item.file }}"
+    src: templates/certificate.crt.j2
+    mode: '644'
+  vars:
+    name: "{{ item.name }}"
+    content: "{{ item.certificate }}"
+  loop: "{{ pki__certificates }}"
+  when: pki__certificates is defined
